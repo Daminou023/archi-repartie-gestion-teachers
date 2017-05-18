@@ -1,0 +1,80 @@
+<section>
+  <div class="page-header">
+    <div class="row container">
+        <h1>Manage Activities</h1>
+        <button class="btn btn-danger" ng-click="vm.save()">Save Changes</button>
+    </div>
+  </div>
+
+  <div class="list-group col-md-6">
+    <a ng-repeat="user in vm.users" class="list-group-item" ng-click="vm.selectTeacher(user)">
+      <h4 class="list-group-item-heading" ng-bind="user.username"></h4>
+      <p class="list-group-item-text pull-right small" ng-bind="user.roles"></p>
+      <p class="list-group-item-text" ng-bind="user.email"></p>
+    </a>
+  </div>
+  <div class="col-md-6">
+    <uib-tabset>
+      <uib-tab heading="This teacher's activities">
+        <div class="col-md-12">
+          <h2 ng-if="!vm.selectedTeacher">Select a Teacher!</h2>
+          <h2 ng-if="vm.selectedTeacher">{{vm.selectedTeacher.lastName}}'s activities</h2>
+          <table ng-if="vm.selectedTeacher" class="table">
+            <tr>
+              <th>Activity</th>
+              <th>Hours</th>
+            </tr>
+            <tr ng-repeat="activity in vm.selectedTeacher.activities">
+              <td>{{activity.name}}</td>
+              <td>{{activity.hours}}</td>
+            </tr>
+            <tr>
+              <th>Total:</th>
+              <th>{{vm.selectedTeacher.totalHours}}</th>
+            </tr>
+          </table>
+        </div>
+      </uib-tab>
+      <uib-tab ng-if="vm.selectedTeacher" heading="Edit">
+        <div class="col-md-12">
+          <h2>Edit</h2>
+          <div class="col-md-12">
+          <table class="table">
+            <tr>
+              <th>Activity</th>
+              <th>Hours</th>
+              <th>Assigned</th>
+            </tr>
+            <tr ng-repeat="activity in vm.activities">
+              <td>{{activity.name}}</td>
+              <td>{{activity.hours}}</td>
+              <td>
+                <input type="checkbox" 
+                ng-checked="vm.selectedTeacher.activities.includes(activity)" ng-click="vm.editTeacherActivities(activity)"/>
+              </td>
+            </tr>
+            <tr>
+              <th>Total:</th>
+              <th>{{vm.selectedTeacher.totalHours}}</th>
+            </tr>
+          </table>
+          </div>
+        </div>
+      </uib-tab>
+    </uib-tabset>
+  </div>
+  <hr>
+  <style type="text/css">
+
+  .div {
+    word-break: break-all;
+  }
+  h1 {
+    margin: 0;
+      display: inline-block;
+  }
+  button {
+    float: right;
+  }
+  </style>
+</section>

@@ -1,0 +1,23 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.title}}</h1>
+  </div>
+	<div>
+        <h2>{{vm.user.lastName}}'s activities</h2>
+          <table class="table">
+            <tr>
+              <th>Activity</th>
+              <th>Hours</th>
+            </tr>
+            <tr ng-repeat="activity in vm.user.activities">
+              <td>{{activity.name}}</td>
+              <td>{{activity.hours}}</td>
+            </tr>
+            <tr>
+              <th>Total:</th>
+              <th>{{vm.user.totalHours}}</th>
+            </tr>
+        </table>
+    </div>
+  </div>
+</section>
